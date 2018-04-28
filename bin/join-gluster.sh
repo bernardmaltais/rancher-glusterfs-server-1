@@ -58,7 +58,7 @@ if [ -e ${SEMAPHORE_FILE} ]; then
    echo "=> So I'm waiting for 60 seconds to finish it..."
    sleep 60
 fi
-check_if_already_joined
+# check_if_already_joined
 
 echo "=> Joining cluster with container ${PEER} ..."
 sshpass -p ${ROOT_PASSWORD} ssh ${SSH_OPTS} ${SSH_USER}@${PEER} "add-gluster-peer.sh ${MY_RANCHER_IP}"
