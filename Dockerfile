@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 
 RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common glusterfs-server supervisor \
-                       openssh-server dnsutils sshpass iputils-ping
+                       openssh-server dnsutils sshpass iputils-ping iproute2
 
 ENV ROOT_PASSWORD **ChangeMe**
 
