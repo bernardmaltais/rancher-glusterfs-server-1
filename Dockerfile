@@ -1,12 +1,10 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
-MAINTAINER Manel Martinez <manel@nixelsolutions.com>
+# MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
-    apt-get install -y python-software-properties software-properties-common
-RUN add-apt-repository -y ppa:gluster/glusterfs-3.7 && \
-    apt-get update && \
-    apt-get install -y glusterfs-server supervisor openssh-server dnsutils sshpass
+    apt-get install -y python-software-properties software-properties-common glusterfs-server supervisor \
+                       openssh-server dnsutils sshpass iputils-ping
 
 ENV ROOT_PASSWORD **ChangeMe**
 
