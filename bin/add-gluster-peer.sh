@@ -76,7 +76,7 @@ if ! echo "${PEER_STATUS}" | grep "Peer in Cluster" >/dev/null; then
     # Peer probe
     echo "=> Probing peer ${PEER} ..."
     gluster peer probe ${PEER}
-    sleep 15
+    sleep 5
 fi
 
 # Check how many peers are already joined in the cluster - needed to add a replica
@@ -85,14 +85,14 @@ NUMBER_OF_REPLICAS=`gluster volume info ${GLUSTER_VOL} | grep "Number of Bricks:
 if ! gluster volume list | grep "^${GLUSTER_VOL}$" >/dev/null; then
    echo "=> Creating GlusterFS volume ${GLUSTER_VOL}..."
    gluster volume create ${GLUSTER_VOL} replica 2 ${MY_RANCHER_IP}:${GLUSTER_BRICK_PATH} ${PEER}:${GLUSTER_BRICK_PATH} force || detach
-   sleep 10
+   sleep 1
 fi
 
 # Start the volume
 if ! gluster volume status ${GLUSTER_VOL} >/dev/null; then
    echo "=> Starting GlusterFS volume ${GLUSTER_VOL}..."
    gluster volume start ${GLUSTER_VOL}
-   sleep 10
+   sleep 1
    # Enable quota on this volume
    gluster volume quota ${GLUSTER_VOL} enable 
 fi
