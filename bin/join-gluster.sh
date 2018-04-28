@@ -21,6 +21,16 @@ check_if_already_joined
 
 # Join the cluster - choose a suitable container
 ALIVE=0
+
+for PEER in ${GLUSTER_PEERS}; do
+   # Skip myself
+   if [ "${MY_RANCHER_IP}" == "${PEER}" ]; then
+      continue
+   fi
+   echo "=> Asking ${PEER} to probe me ..."
+   sshpass -p ${ROOT_PASSWORD} ssh ${SSH_OPTS} ${SSH_USER}@${PEER} "gluster peer probe ${MY_RANCHER_IP}"
+done
+
 for PEER in ${GLUSTER_PEERS}; do
    # Skip myself
    if [ "${MY_RANCHER_IP}" == "${PEER}" ]; then
